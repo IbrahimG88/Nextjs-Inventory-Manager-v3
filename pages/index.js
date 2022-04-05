@@ -1,10 +1,16 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 
-import AuthForm from "../components/auth/auth-form";
 import StartingPageContent from "../components/starting-page/starting-page";
+import "bulma/css/bulma.min.css";
+
+import { Fragment } from "react";
 
 function HomePage() {
-  return <StartingPageContent />;
+  return (
+    <Fragment>
+      <StartingPageContent />
+    </Fragment>
+  );
 }
 
 export default HomePage;

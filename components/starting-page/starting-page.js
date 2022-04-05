@@ -14,17 +14,33 @@ function StartingPageContent() {
 export default StartingPageContent;
 
 */
+
 import { useSession, signIn, signOut } from "next-auth/react";
-import AuthForm from "../auth/auth-form";
+
+import AuthForm from "../../components/auth/auth-form";
+
+import "bulma/css/bulma.min.css";
+import BulmaNavBar from "../../pages/Layout/bulma-Navbar";
+import BulmaMenu from "../../pages/Layout/bulma-menu";
+import { Fragment } from "react";
+
+import { ChakraProvider } from "@chakra-ui/react";
 
 export default function StartingPageContent() {
   const { data: session } = useSession();
   if (session) {
     return (
-      <>
-        Signed in as {session.user.email} <br />
+      <Fragment>
+        <p>Signed in as {session.user.email} </p>
+        <br />
         <button onClick={() => signOut()}>Sign out</button>
-      </>
+        <ChakraProvider>
+          <BulmaNavBar />
+          <div style={{ display: "flex", "flex-direction": "row" }}>
+            <BulmaMenu className="column is-one-quarter" />
+          </div>
+        </ChakraProvider>
+      </Fragment>
     );
   }
   return (
