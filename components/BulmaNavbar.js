@@ -1,12 +1,12 @@
-import BulmaMenu from "./bulma-menu";
 import { Fragment } from "react";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function BulmaNavBar() {
   return (
     <Fragment>
       <nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
-          <a className="navbar-item" href="https://bulma.io">
+          <a>
             <img
               src="https://bulma.io/images/bulma-logo.png"
               width="112"
@@ -52,7 +52,10 @@ export default function BulmaNavBar() {
                 <a className="button is-primary">
                   <strong>Sign up</strong>
                 </a>
-                <a className="button is-light">Log in</a>
+
+                <a className="button is-light" onClick={() => signOut()}>
+                  Sign out
+                </a>
               </div>
             </div>
           </div>

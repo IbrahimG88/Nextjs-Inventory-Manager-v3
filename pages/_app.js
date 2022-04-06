@@ -2,6 +2,8 @@
 import { SessionProvider } from "next-auth/react";
 
 import "bulma/css/bulma.min.css";
+import { ChakraProvider } from "@chakra-ui/react";
+import Layout from "../components/Layout";
 
 export default function App({
   Component,
@@ -9,7 +11,11 @@ export default function App({
 }) {
   return (
     <SessionProvider session={session}>
-      <Component {...pageProps} />
+      <ChakraProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ChakraProvider>
     </SessionProvider>
   );
 }

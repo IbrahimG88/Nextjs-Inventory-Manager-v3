@@ -1,7 +1,9 @@
 import Link from "next/link";
-import { useSession, signOut } from "next-auth/client";
+import { useSession, signOut } from "next-auth/";
 
 import classes from "./main-navigation.module.css";
+import BulmaNavBar from "../../pages/Layout/bulma-Navbar";
+import BulmaMenu from "../../pages/Layout/bulma-menu";
 
 function MainNavigation() {
   const [session, loading] = useSession();
@@ -18,6 +20,8 @@ function MainNavigation() {
         </a>
       </Link>
       <nav>
+        <BulmaNavBar />
+        <BulmaMenu />
         <ul>
           {!session && !loading && (
             <li>

@@ -4,8 +4,7 @@ import Home from "./home";
 import AuthForm from "../components/auth/auth-form";
 
 import "bulma/css/bulma.min.css";
-import BulmaNavBar from "./Layout/bulma-Navbar";
-import BulmaMenu from "./Layout/bulma-menu";
+
 import { Fragment } from "react";
 
 import { ChakraProvider } from "@chakra-ui/react";
@@ -29,7 +28,6 @@ export default function MyAppHere() {
             </div>
           </ChakraProvider>
         </Fragment>
-        );
       </div>
     );
   }
