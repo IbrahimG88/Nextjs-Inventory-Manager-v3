@@ -2,12 +2,12 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function BulmaMenu() {
-  const [isActive, setActive] = useState("Update tests list");
+  const [isActive, setActive] = useState();
 
   const data = [
-    { link: "/accordion-updated", label: "Notifications" },
+    { link: "/", label: "Notifications" },
     { link: "", label: "Inventory" },
-    { link: "", label: "Add Stocks" },
+    { link: "/accordion-updated", label: "Add Stocks" },
     { link: "/load-inventory-from-lis", label: "Update tests list" },
   ];
 

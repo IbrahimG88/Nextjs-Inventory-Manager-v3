@@ -1,3 +1,4 @@
+/*
 import { useSession, signIn, signOut } from "next-auth/react";
 import Home from "./home";
 
@@ -37,3 +38,5 @@ export default function MyAppHere() {
     </>
   );
 }
+
+*/

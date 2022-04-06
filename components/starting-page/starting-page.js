@@ -14,7 +14,7 @@ function StartingPageContent() {
 export default StartingPageContent;
 
 */
-
+/*
 import { useSession, signIn, signOut } from "next-auth/react";
 
 import AuthForm from "../../components/auth/auth-form";

@@ -11,7 +11,7 @@ export default function Layout({ children }) {
     return (
       <>
         <BulmaNavBar />
-        <div style={{ display: "flex", "flex-direction": "row" }}>
+        <div style={{ display: "flex", flexDirection: "row" }}>
           <BulmaMenu className="column is-one-quarter" />
 
           <main>{children}</main>
