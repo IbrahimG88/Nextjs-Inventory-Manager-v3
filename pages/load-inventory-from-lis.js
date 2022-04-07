@@ -1,4 +1,7 @@
 import { useRouter } from "next/router";
+import { useState } from "react";
+import { Button } from "@chakra-ui/react";
+import { Text, Container, Box } from "@chakra-ui/react";
 
 export const getStaticProps = async () => {
   return fetch("http://197.45.107.206/api2/integration/tests")
@@ -25,8 +28,10 @@ export const getStaticProps = async () => {
 function LoadInventoryFromLIS(props) {
   const router = useRouter();
   const { testsList } = props;
+  const [loading, setLoading] = useState(false);
 
   async function addInventoryItemHandler() {
+    setLoading(true);
     //console.log(testsList);
     // use of Fetch API to make a request to the new-meal api and get back a response
     await fetch("/api/api-insert-test-mongo-check-first", {
@@ -37,12 +42,13 @@ function LoadInventoryFromLIS(props) {
       },
     })
       .then((data) => data.json())
-      .then((data) => console.log(data))
-      .then(
+      .then((data) => console.log(data));
+
+    /*.then(
         router.push({
           pathname: "/",
         })
-      );
+      );*/
   }
 
   if (!testsList) {
@@ -50,16 +56,30 @@ function LoadInventoryFromLIS(props) {
   }
 
   return (
-    <div>
-      <button onClick={addInventoryItemHandler}>CLick me to load tests</button>
-      <p>length: {testsList.length}</p>
-
-      <ul>
-        {testsList.map((test) => (
-          <li key={test.id}> {test.testName}</li>
-        ))}
-      </ul>
-    </div>
+    <Container maxW="2xl" margin={"50px"}>
+      <Box>
+        <Button
+          onClick={addInventoryItemHandler}
+          colorScheme="teal"
+          variant="outline"
+          margin={"10px"}
+        >
+          Update testsList
+        </Button>
+        <Text fontSize="md" margin={"10px"}>
+          Number of tests in inventory: {testsList.length}
+        </Text>
+        {loading ? (
+          <Text fontSize="md" margin={"10px"}>
+            Tests List is being updated
+          </Text>
+        ) : (
+          <Text fontSize="md" margin={"10px"}>
+            Click to load or update tests list
+          </Text>
+        )}
+      </Box>
+    </Container>
   );
 }
 
