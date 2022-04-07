@@ -6,7 +6,7 @@ export default function BulmaMenu() {
 
   const data = [
     { link: "/", label: "Notifications" },
-    { link: "", label: "Inventory" },
+    { link: "/react-table", label: "Inventory" },
     { link: "/accordion-updated", label: "Add Stocks" },
     { link: "/load-inventory-from-lis", label: "Update tests list" },
   ];
