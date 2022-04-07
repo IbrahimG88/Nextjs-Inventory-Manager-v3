@@ -1,16 +1,20 @@
 import { Fragment } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
+import Image from "next/image";
+import Logo from "../public/Inventory-Manager-logos_black.png";
 
 export default function BulmaNavBar() {
   return (
     <Fragment>
       <nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
-          <a>
-            <img
-              src="https://bulma.io/images/bulma-logo.png"
-              width="112"
-              height="28"
+          <a href="/">
+            <Image
+              src={Logo}
+              alt="App Logo"
+              width={100}
+              height={100}
+              styles={{ radios: "10px" }}
             />
           </a>
 
