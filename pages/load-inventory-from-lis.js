@@ -53,7 +53,7 @@ function LoadInventoryFromLIS(props) {
   }
 
   async function updateDateToNow() {
-    await fetch(`${process.env.APP_URL}/api/appVariablesUpdateDate`);
+    await fetch("http://localhost:3000/api/appVariablesUpdateDate");
   }
 
   if (!testsList) {
