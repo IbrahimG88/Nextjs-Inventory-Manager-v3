@@ -5,7 +5,7 @@ export default function BulmaMenu() {
   const [isActive, setActive] = useState();
 
   const data = [
-    { link: "/", label: "Home" },
+    { link: `${process.env.APP_URL}/`, label: "Home" },
     { link: "/react-table", label: "Inventory" },
     { link: "/accordion-updated", label: "Add Stocks" },
     { link: "/load-inventory-from-lis", label: "Update tests list" },
