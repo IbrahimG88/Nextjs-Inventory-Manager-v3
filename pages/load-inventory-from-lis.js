@@ -4,7 +4,7 @@ import { Button } from "@chakra-ui/react";
 import { Text, Container, Box } from "@chakra-ui/react";
 
 export const getStaticProps = async () => {
-  return fetch(`${process.env.LAB_TESTS_API_ENDPOINT}`)
+  return fetch("http://197.45.107.206/api2/integration/tests")
     .then((response) => response.json())
     .then((data) => {
       //   console.log("data", data);
