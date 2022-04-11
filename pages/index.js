@@ -8,7 +8,7 @@ import { Text } from "@chakra-ui/react";
 import Link from "next/link";
 
 export const getStaticProps = async () => {
-  const getPreviousDate = await fetch("/api/appVariablesGetDate").then(
+  const getPreviousDate = await fetch("./api/appVariablesGetDate").then(
     (response) => {
       return response.json().then((data) => {
         console.log("data look", data);
@@ -87,7 +87,7 @@ export const getStaticProps = async () => {
 
   console.log("revalidate");
 
-  await fetch("/api/appVariablesUpdateDate");
+  await fetch("./api/appVariablesUpdateDate");
 
   return {
     props: { finalArray },
@@ -95,7 +95,7 @@ export const getStaticProps = async () => {
   };
 };
 
-const FrequencyWorklist = ({ finalArray }) => {
+export default function FrequencyWorklist({ finalArray }) {
   return (
     <Text style={{ marginLeft: "50px" }}>
       <br />
@@ -120,9 +120,7 @@ const FrequencyWorklist = ({ finalArray }) => {
       enable sorting.
     </Text>
   );
-};
-
-export default FrequencyWorklist;
+}
 
 /*
    <ul>
