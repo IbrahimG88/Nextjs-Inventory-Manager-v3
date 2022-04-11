@@ -138,6 +138,18 @@ export default function App() {
 
   return (
     <Fragment>
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        <Input
+          value={filterInputTest}
+          onChange={handleFilterChange}
+          placeholder={"Search testname"}
+        />
+        <Input
+          value={filterInputId}
+          onChange={handleFilterChangeById}
+          placeholder={"Search id"}
+        />
+      </div>
       <Table {...getTableProps()} style={{ border: "solid 1px blue" }}>
         <Thead>
           {headerGroups.map((headerGroup) => (
@@ -170,18 +182,7 @@ export default function App() {
             </Tr>
           ))}
         </Thead>
-        <div style={{ display: "flex", "flex-direction": "row" }}>
-          <Input
-            value={filterInputTest}
-            onChange={handleFilterChange}
-            placeholder={"Search testname"}
-          />
-          <Input
-            value={filterInputId}
-            onChange={handleFilterChangeById}
-            placeholder={"Search id"}
-          />
-        </div>
+
         <Tbody {...getTableBodyProps()}>
           {rows.map((row) => {
             prepareRow(row);

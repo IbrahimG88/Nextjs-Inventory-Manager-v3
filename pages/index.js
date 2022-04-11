@@ -8,16 +8,16 @@ import { Text } from "@chakra-ui/react";
 import Link from "next/link";
 
 export const getStaticProps = async () => {
-  const getPreviousDate = await fetch("./api/appVariablesGetDate").then(
-    (response) => {
-      return response.json().then((data) => {
-        console.log("data look", data);
+  const getPreviousDate = await fetch(
+    "http://localhost:3000/api/appVariablesGetDate"
+  ).then((response) => {
+    return response.json().then((data) => {
+      console.log("data look", data);
 
-        const myDate = new Date(data[0].date);
-        return myDate;
-      });
-    }
-  );
+      const myDate = new Date(data[0].date);
+      return myDate;
+    });
+  });
   console.log("getPreviousDate", new Date(getPreviousDate));
 
   const dateIndividualData = (singleDate) => {
@@ -87,11 +87,10 @@ export const getStaticProps = async () => {
 
   console.log("revalidate");
 
-  await fetch("./api/appVariablesUpdateDate");
+  await fetch("http://localhost:3000/api/appVariablesUpdateDate");
 
   return {
     props: { finalArray },
-    revalidate: 10,
   };
 };
 
@@ -109,9 +108,7 @@ export default function FrequencyWorklist({ finalArray }) {
       section. You can view all tests inventory and amounts remaining for each
       item in the
       <Link href="/react-table" passHref>
-        <a>
-          <strong> Inventory </strong>
-        </a>
+        <strong> Inventory </strong>
       </Link>
       module.
       <br />

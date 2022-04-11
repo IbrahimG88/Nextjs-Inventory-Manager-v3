@@ -2,10 +2,10 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function BulmaMenu() {
-  const [isActive, setActive] = useState();
+  const [isActive, setActive] = useState("Update tests list");
 
   const data = [
-    { link: `${process.env.APP_URL}/`, label: "Home" },
+    { link: "/", label: "Home" },
     { link: "/react-table", label: "Inventory" },
     { link: "/accordion-updated", label: "Add Stocks" },
     { link: "/load-inventory-from-lis", label: "Update tests list" },
@@ -13,7 +13,7 @@ export default function BulmaMenu() {
 
   return (
     <aside
-      className="menu column is-one-quarter column"
+      className="menu column is-one-quarter"
       style={{ " menuItemActiveColor": "#fff" }}
     >
       <p className="menu-label ">Menu</p>
@@ -21,13 +21,16 @@ export default function BulmaMenu() {
         {data.map((item) => (
           <li key={item.label}>
             <Link href={item.link} passHref>
-              className={item.label === isActive ? "is-active" : null}
-              onClick=
-              {(event) => {
-                // event.preventDefault();
-                setActive(item.label);
-              }}
-              <span>{item.label}</span>
+              <a
+                //href={item.link}
+                className={item.label === isActive ? "is-active" : null}
+                onClick={(event) => {
+                  // event.preventDefault();
+                  setActive(item.label);
+                }}
+              >
+                <span>{item.label}</span>
+              </a>
             </Link>
           </li>
         ))}

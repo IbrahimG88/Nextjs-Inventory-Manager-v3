@@ -120,60 +120,64 @@ export default function ItemsList() {
   }
 
   return (
-    <Accordion allowToggle>
-      <p>Type to filter the tests list:</p>
-      <br />
-      <Input
-        id="filter"
-        name="filter"
-        type="text"
-        value={filter}
-        placeholder="search for test..."
-        onChange={(event) => setFilter(event.target.value.toLowerCase())}
-      />
-      {filter ? (
-        sales
-          .filter((f) => f.testName.toLowerCase().indexOf(filter) > -1)
-          .map((item, index) => (
-            <AccordionItem key={item.id}>
-              <h2>
-                <AccordionButton _expanded={{ bg: "blue", color: "white" }}>
-                  <Box flex="1" textAlign="left">
-                    {item.testName}
-                  </Box>
-                  <AccordionIcon />
-                </AccordionButton>
-              </h2>
-              <AccordionPanel pb={4}>
-                <Text> Add Stocks:</Text>
-                <Input
-                  placeholder="stocks to add..."
-                  type="number"
-                  name="stocksAdded"
-                  id="stocksAdded"
-                  value={amountsInput}
-                  onChange={(e) =>
-                    handleChange(e, index, item.id - 1, item.testName)
-                  }
-                  onKeyDown={(e) => handleKeyDown(e, index, item.id - 1)}
-                />
-                {item.updatedStocks ? (
-                  <Text>
-                    Updated Total Stocks: {item.totalStocks} +{" "}
-                    {item.stocksToAdd} = {item.updatedStocks}
-                  </Text>
-                ) : (
-                  <Text>Previous Total Stocks: {item.totalStocks}</Text>
-                )}
-              </AccordionPanel>
-            </AccordionItem>
-          ))
-      ) : (
-        <div>
-          <br />
-          <p>Type the test name you want to search for to add stocks for...</p>
-        </div>
-      )}
-    </Accordion>
+    <center>
+      <Accordion allowToggle>
+        <p>Type to filter the tests list:</p>
+        <br />
+        <Input
+          id="filter"
+          name="filter"
+          type="text"
+          value={filter}
+          placeholder="search for test..."
+          onChange={(event) => setFilter(event.target.value.toLowerCase())}
+        />
+        {filter ? (
+          sales
+            .filter((f) => f.testName.toLowerCase().indexOf(filter) > -1)
+            .map((item, index) => (
+              <AccordionItem key={item.id}>
+                <h2>
+                  <AccordionButton _expanded={{ bg: "blue", color: "white" }}>
+                    <Box flex="1" textAlign="left">
+                      {item.testName}
+                    </Box>
+                    <AccordionIcon />
+                  </AccordionButton>
+                </h2>
+                <AccordionPanel pb={4}>
+                  <Text> Add Stocks:</Text>
+                  <Input
+                    placeholder="stocks to add..."
+                    type="number"
+                    name="stocksAdded"
+                    id="stocksAdded"
+                    value={amountsInput}
+                    onChange={(e) =>
+                      handleChange(e, index, item.id - 1, item.testName)
+                    }
+                    onKeyDown={(e) => handleKeyDown(e, index, item.id - 1)}
+                  />
+                  {item.updatedStocks ? (
+                    <Text>
+                      Updated Total Stocks: {item.totalStocks} +{" "}
+                      {item.stocksToAdd} = {item.updatedStocks}
+                    </Text>
+                  ) : (
+                    <Text>Previous Total Stocks: {item.totalStocks}</Text>
+                  )}
+                </AccordionPanel>
+              </AccordionItem>
+            ))
+        ) : (
+          <div>
+            <br />
+            <p>
+              Type the test name you want to search for to add stocks for...
+            </p>
+          </div>
+        )}
+      </Accordion>
+    </center>
   );
 }
