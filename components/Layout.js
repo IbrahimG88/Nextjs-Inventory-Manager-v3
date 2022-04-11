@@ -1,4 +1,3 @@
-import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import BulmaMenu from "./BulmaMenu";
 import BulmaNavBar from "./BulmaNavbar";

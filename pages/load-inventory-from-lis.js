@@ -20,7 +20,7 @@ export const getStaticProps = async () => {
         props: {
           testsList: transformedTestsList,
         },
-        revalidate: 10000,
+        // revalidate: 10000,
       };
     });
 };
@@ -49,6 +49,8 @@ function LoadInventoryFromLIS(props) {
           pathname: "/",
         })
       );*/
+    // updates app date
+    await fetch("http://localhost:3000/api/appVariablesUpdateDate");
   }
 
   if (!testsList) {
@@ -75,7 +77,8 @@ function LoadInventoryFromLIS(props) {
           </Text>
         ) : (
           <Text fontSize="md" margin={"10px"}>
-            Click to load or update tests list
+            Click to load or update tests list, also initializes the app
+            inventory and app dates variable
           </Text>
         )}
       </Box>
