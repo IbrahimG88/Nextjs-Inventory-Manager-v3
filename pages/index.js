@@ -9,7 +9,7 @@ import Link from "next/link";
 
 export const getStaticProps = async () => {
   const getPreviousDate = await fetch(
-    `http://localhost:3000/api/appVariablesGetDate`
+    "http://localhost:3000/api/appVariablesGetDate"
   ).then((response) => {
     return response.json().then((data) => {
       console.log("data look", data);
@@ -75,7 +75,7 @@ export const getStaticProps = async () => {
   }
   console.log("finalArray look", finalArray);
 
-  fetch(`http://localhost:3000/api/optimizedUpdateItemStocks`, {
+  fetch("http://localhost:3000/api/optimizedUpdateItemStocks", {
     method: "POST",
     body: JSON.stringify(finalArray),
     headers: {
