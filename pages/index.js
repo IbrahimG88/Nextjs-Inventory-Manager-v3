@@ -87,9 +87,7 @@ export const getStaticProps = async () => {
 
   console.log("revalidate");
 
-  await fetch(
-    `${process.env.APP_URL}http://localhost:3000/api/appVariablesUpdateDate`
-  );
+  await fetch(`${process.env.APP_URL}/api/appVariablesUpdateDate`);
 
   return {
     props: { finalArray },
