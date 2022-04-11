@@ -104,9 +104,7 @@ const FrequencyWorklist = ({ finalArray }) => {
       inventory consumption data. You can search all test items and add the
       corresponding stocks in the
       <Link href="/accordion-updated" passHref>
-        <a>
-          <strong> add stocks </strong>
-        </a>
+        <strong> add stocks </strong>
       </Link>
       section. You can view all tests inventory and amounts remaining for each
       item in the
