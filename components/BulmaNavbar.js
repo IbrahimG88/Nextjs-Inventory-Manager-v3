@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Image from "next/image";
 import Logo from "../public/Inventory-Manager-logos_black.png";
+import Link from "next/link";
 
 export default function BulmaNavBar() {
   return (
@@ -13,7 +14,7 @@ export default function BulmaNavBar() {
         style={{ backgroundColor: "bisque" }}
       >
         <div className="navbar-brand">
-          <a href="/">
+          <Link href="/" passHref>
             <Image
               src={Logo}
               alt="App Logo"
@@ -21,9 +22,9 @@ export default function BulmaNavBar() {
               height={100}
               styles={{ radios: "10px" }}
             />
-          </a>
+          </Link>
 
-          <a
+          <Link
             role="button"
             className="navbar-burger"
             aria-label="menu"
@@ -33,24 +34,24 @@ export default function BulmaNavBar() {
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
-          </a>
+          </Link>
         </div>
 
         <div id="navbarBasicExample" className="navbar-menu">
           <div className="navbar-start">
-            <a className="navbar-item">Documentation</a>
+            <Link className="navbar-item">Documentation</Link>
 
-            <a className="navbar-item">About</a>
+            <Link className="navbar-item">About</Link>
 
             <div className="navbar-item has-dropdown is-hoverable">
-              <a className="navbar-link">Contact us</a>
+              <Link className="navbar-link">Contact us</Link>
 
               <div className="navbar-dropdown">
-                <a className="navbar-item">About</a>
-                <a className="navbar-item">Jobs</a>
-                <a className="navbar-item">Contact</a>
+                <Link className="navbar-item">About</Link>
+                <Link className="navbar-item">Jobs</Link>
+                <Link className="navbar-item">Contact</Link>
                 <hr className="navbar-divider" />
-                <a className="navbar-item">Report an issue</a>
+                <Link className="navbar-item">Report an issue</Link>
               </div>
             </div>
           </div>
@@ -58,9 +59,9 @@ export default function BulmaNavBar() {
           <div className="navbar-end">
             <div className="navbar-item">
               <div className="buttons">
-                <a className="button is-light" onClick={() => signOut()}>
+                <Link className="button is-light" onClick={() => signOut()}>
                   Sign out
-                </a>
+                </Link>
               </div>
             </div>
           </div>

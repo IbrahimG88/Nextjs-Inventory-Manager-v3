@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import { connectToDatabase } from "../../lib/db";
 //working
 export default async (req, res) => {

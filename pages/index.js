@@ -1,5 +1,3 @@
-import { useSession, signIn, signOut } from "next-auth/react";
-
 import { Fragment } from "react";
 
 import { useState } from "react";
@@ -11,7 +9,7 @@ import Link from "next/link";
 
 export const getStaticProps = async () => {
   const getPreviousDate = await fetch(
-    "http://localhost:3000/api/appVariablesGetDate"
+    `${process.env.APP_URL}/api/appVariablesGetDate`
   ).then((response) => {
     return response.json().then((data) => {
       console.log("data look", data);
@@ -45,7 +43,7 @@ export const getStaticProps = async () => {
 
   const dateSample = dateIndividualData(getPreviousDate);
   const res = await fetch(
-    `http://197.45.107.206/api2/integration/worklist/${dateSample.year}-${
+    `${process.env.LAB_WORKLIST_API_ENDPOINT}/${dateSample.year}-${
       dateSample.month
     }-${dateSample.day}%2000:00:00:00/${nowDate().year}-${nowDate().month}-${
       nowDate().day
@@ -77,7 +75,7 @@ export const getStaticProps = async () => {
   }
   console.log("finalArray look", finalArray);
 
-  fetch("http://localhost:3000/api/optimizedUpdateItemStocks", {
+  fetch(`${process.env.APP_URL}/api/optimizedUpdateItemStocks`, {
     method: "POST",
     body: JSON.stringify(finalArray),
     headers: {
@@ -89,7 +87,9 @@ export const getStaticProps = async () => {
 
   console.log("revalidate");
 
-  await fetch("http://localhost:3000/api/appVariablesUpdateDate");
+  await fetch(
+    `${process.env.APP_URL}http://localhost:3000/api/appVariablesUpdateDate`
+  );
 
   return {
     props: { finalArray },

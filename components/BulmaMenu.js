@@ -21,16 +21,13 @@ export default function BulmaMenu() {
         {data.map((item) => (
           <li key={item.label}>
             <Link href={item.link} passHref>
-              <a
-                //href={item.link}
-                className={item.label === isActive ? "is-active" : null}
-                onClick={(event) => {
-                  // event.preventDefault();
-                  setActive(item.label);
-                }}
-              >
-                <span>{item.label}</span>
-              </a>
+              className={item.label === isActive ? "is-active" : null}
+              onClick=
+              {(event) => {
+                // event.preventDefault();
+                setActive(item.label);
+              }}
+              <span>{item.label}</span>
             </Link>
           </li>
         ))}
