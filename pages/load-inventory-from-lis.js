@@ -50,6 +50,9 @@ function LoadInventoryFromLIS(props) {
         })
       );*/
     // updates app date
+  }
+
+  async function updateDateToNow() {
     await fetch("http://localhost:3000/api/appVariablesUpdateDate");
   }
 
@@ -59,6 +62,9 @@ function LoadInventoryFromLIS(props) {
 
   return (
     <Container maxW="2xl" margin={"50px"}>
+      <Text>
+        Admin section to manage app variables. Do not use unless advised.
+      </Text>
       <Box>
         <Button
           onClick={addInventoryItemHandler}
@@ -67,6 +73,14 @@ function LoadInventoryFromLIS(props) {
           margin={"10px"}
         >
           Update testsList
+        </Button>
+        <Button
+          onClick={updateDateToNow}
+          colorScheme="teal"
+          variant="outline"
+          margin={"10px"}
+        >
+          Set Date to now
         </Button>
         <Text fontSize="md" margin={"10px"}>
           Number of tests in inventory: {testsList.length}

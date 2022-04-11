@@ -13,10 +13,10 @@ export default function BulmaMenu() {
 
   return (
     <aside
-      className="menu column is-one-quarter"
+      className="menu column is-one-quarter column"
       style={{ " menuItemActiveColor": "#fff" }}
     >
-      <p className="menu-label ">General</p>
+      <p className="menu-label ">Menu</p>
       <ul className="menu-list">
         {data.map((item) => (
           <li key={item.label}>

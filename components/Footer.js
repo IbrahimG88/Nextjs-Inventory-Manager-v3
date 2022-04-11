@@ -3,7 +3,9 @@ export default function About() {
     <>
       <center>
         <div>
-          <p>Footer Page</p>
+          <p>
+            <strong>Invnetory Manager app by Ibrahim EL Gohary</strong>
+          </p>
         </div>
       </center>
     </>

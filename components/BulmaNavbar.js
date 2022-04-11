@@ -6,7 +6,12 @@ import Logo from "../public/Inventory-Manager-logos_black.png";
 export default function BulmaNavBar() {
   return (
     <Fragment>
-      <nav className="navbar" role="navigation" aria-label="main navigation">
+      <nav
+        className="navbar"
+        role="navigation"
+        aria-label="main navigation"
+        style={{ backgroundColor: "bisque" }}
+      >
         <div className="navbar-brand">
           <a href="/">
             <Image
@@ -33,12 +38,12 @@ export default function BulmaNavBar() {
 
         <div id="navbarBasicExample" className="navbar-menu">
           <div className="navbar-start">
-            <a className="navbar-item">Home</a>
-
             <a className="navbar-item">Documentation</a>
 
+            <a className="navbar-item">About</a>
+
             <div className="navbar-item has-dropdown is-hoverable">
-              <a className="navbar-link">More</a>
+              <a className="navbar-link">Contact us</a>
 
               <div className="navbar-dropdown">
                 <a className="navbar-item">About</a>

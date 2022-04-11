@@ -1,12 +1,13 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 
-import "bulma/css/bulma.min.css";
-
 import { Fragment } from "react";
 
 import { useState } from "react";
 
 export const panelTypes = [];
+
+import { Text } from "@chakra-ui/react";
+import Link from "next/link";
 
 export const getStaticProps = async () => {
   const getPreviousDate = await fetch(
@@ -98,14 +99,41 @@ export const getStaticProps = async () => {
 
 const FrequencyWorklist = ({ finalArray }) => {
   return (
-    <ul>
+    <Text style={{ marginLeft: "50px" }}>
+      <br />
+      <br />
+      Welcome to the <strong>Inventory Manager app</strong> that automates
+      inventory consumption data. You can search all test items and add the
+      corresponding stocks in the
+      <Link href="/accordion-updated" passHref>
+        <a>
+          <strong> add stocks </strong>
+        </a>
+      </Link>
+      section. You can view all tests inventory and amounts remaining for each
+      item in the
+      <Link href="/react-table" passHref>
+        <a>
+          <strong> Inventory </strong>
+        </a>
+      </Link>
+      module.
+      <br />
+      <br />
+      In the Inventory you can seacrh for items and click the column title to
+      enable sorting.
+    </Text>
+  );
+};
+
+export default FrequencyWorklist;
+
+/*
+   <ul>
       {finalArray.map((item) => (
         <li key={item.name}>
           {item.name}:{item.frequency}
         </li>
       ))}
     </ul>
-  );
-};
-
-export default FrequencyWorklist;
+    */
