@@ -4,8 +4,10 @@ import { Text } from "@chakra-ui/react";
 import Link from "next/link";
 
 export const getStaticProps = async () => {
+  let dev = process.env.NODE_ENV !== "production";
+  let { DEV_URL, PROD_URL } = process.env;
   const getPreviousDate = await fetch(
-    "https://nextjs-inventory-manager.vercel.app/api/appVariablesGetDate"
+    `${dev ? DEV_URL : PROD_URL}/api/appVariablesGetDate`
   ).then((response) => {
     return response.json().then((data) => {
       console.log("data look", data);
@@ -71,24 +73,19 @@ export const getStaticProps = async () => {
   }
   console.log("finalArray look", finalArray);
 
-  fetch(
-    "https://nextjs-inventory-manager.vercel.app/api/optimizedUpdateItemStocks",
-    {
-      method: "POST",
-      body: JSON.stringify(finalArray),
-      headers: {
-        "content-Type": "application/json",
-      },
-    }
-  )
+  fetch(`${dev ? DEV_URL : PROD_URL}/api/optimizedUpdateItemStocks`, {
+    method: "POST",
+    body: JSON.stringify(finalArray),
+    headers: {
+      "content-Type": "application/json",
+    },
+  })
     .then((data) => data.json())
     .then((data) => console.log("data here", data));
 
   console.log("revalidate");
 
-  fetch(
-    "https://nextjs-inventory-manager.vercel.app/api/appVariablesUpdateDate"
-  );
+  fetch(`${dev ? DEV_URL : PROD_URL}/api/appVariablesUpdateDate`);
 
   return {
     props: { finalArray },

@@ -67,8 +67,10 @@ export default function ItemsList() {
   };
 
   useEffect(() => {
+    let dev = process.env.NODE_ENV !== "production";
+    let { DEV_URL, PROD_URL } = process.env;
     setIsLoading(true);
-    fetch("https://nextjs-inventory-manager.vercel.app/api/getAllTestsHandler")
+    fetch(`${dev ? DEV_URL : PROD_URL}/api/getAllTestsHandler`)
       .then((response) => response.json())
       .then((data) => {
         //data from firebase will be returned as an object and nested ones
