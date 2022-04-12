@@ -7,6 +7,9 @@ import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import clientPromise from "../../../lib/mongodb";
 import CredentialsProvider from "next-auth/providers/credentials";
 
+let dev = process.env.NODE_ENV !== "production";
+let { DEV_URL, PROD_URL } = process.env;
+
 export default NextAuth({
   // Configure one or more authentication providers
   // secret: process.env.NEXTAUTH_SECRET,
@@ -59,8 +62,8 @@ export default NextAuth({
     // ...add more providers here
   ],
   pages: {
-    signIn: "/",
-    signOut: "/",
+    signIn: `${dev ? DEV_URL : PROD_URL}/`,
+    signOut: `${dev ? DEV_URL : PROD_URL}/`,
   },
   // adapter: MongoDBAdapter(clientPromise),
 });
