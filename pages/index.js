@@ -47,7 +47,8 @@ export const getServerSideProps = async () => {
       dateSample.month
     }-${dateSample.day}%2000:00:00:00/${nowDate().year}-${nowDate().month}-${
       nowDate().day
-    }%2000:00:00:00`
+    }%2000:00:00:00`,
+    { mode: "cors" }
   ).then((response) => {
     return response.json().then((data) => {
       return data;
