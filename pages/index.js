@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export const getStaticProps = async () => {
   const getPreviousDate = await fetch(
-    "http://localhost:3000/api/appVariablesGetDate"
+    "https://nextjs-inventory-manager.vercel.app/api/appVariablesGetDate"
   ).then((response) => {
     return response.json().then((data) => {
       console.log("data look", data);
@@ -71,19 +71,24 @@ export const getStaticProps = async () => {
   }
   console.log("finalArray look", finalArray);
 
-  fetch("http://localhost:3000/api/optimizedUpdateItemStocks", {
-    method: "POST",
-    body: JSON.stringify(finalArray),
-    headers: {
-      "content-Type": "application/json",
-    },
-  })
+  fetch(
+    "https://nextjs-inventory-manager.vercel.app/api/optimizedUpdateItemStocks",
+    {
+      method: "POST",
+      body: JSON.stringify(finalArray),
+      headers: {
+        "content-Type": "application/json",
+      },
+    }
+  )
     .then((data) => data.json())
     .then((data) => console.log("data here", data));
 
   console.log("revalidate");
 
-  fetch("http://localhost:3000/api/appVariablesUpdateDate");
+  fetch(
+    "https://nextjs-inventory-manager.vercel.app/api/appVariablesUpdateDate"
+  );
 
   return {
     props: { finalArray },

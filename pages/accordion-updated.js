@@ -68,7 +68,7 @@ export default function ItemsList() {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch("../api/getAllTestsHandler")
+    fetch("https://nextjs-inventory-manager.vercel.app/api/getAllTestsHandler")
       .then((response) => response.json())
       .then((data) => {
         //data from firebase will be returned as an object and nested ones
@@ -100,7 +100,7 @@ export default function ItemsList() {
 
     console.log("sales[itemIndex]", sales[updatedIndex]);
     console.log("update object", updateObject);
-    await fetch("/api/updateItem", {
+    await fetch("https://nextjs-inventory-manager.vercel.app/api/updateItem", {
       method: "POST",
       body: JSON.stringify(updateObject),
       headers: {

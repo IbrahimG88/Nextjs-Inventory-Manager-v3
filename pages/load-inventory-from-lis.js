@@ -34,13 +34,16 @@ function LoadInventoryFromLIS(props) {
     setLoading(true);
     //console.log(testsList);
     // use of Fetch API to make a request to the new-meal api and get back a response
-    await fetch("/api/api-insert-test-mongo-check-first", {
-      method: "POST",
-      body: JSON.stringify(testsList),
-      headers: {
-        "content-Type": "application/json",
-      },
-    })
+    await fetch(
+      "https://nextjs-inventory-manager.vercel.app/api/api-insert-test-mongo-check-first",
+      {
+        method: "POST",
+        body: JSON.stringify(testsList),
+        headers: {
+          "content-Type": "application/json",
+        },
+      }
+    )
       .then((data) => data.json())
       .then((data) => console.log(data));
 
@@ -53,7 +56,9 @@ function LoadInventoryFromLIS(props) {
   }
 
   async function updateDateToNow() {
-    await fetch("http://localhost:3000/api/appVariablesUpdateDate");
+    await fetch(
+      "https://nextjs-inventory-manager.vercel.app/api/appVariablesUpdateDate"
+    );
   }
 
   if (!testsList) {
