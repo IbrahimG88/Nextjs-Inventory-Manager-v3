@@ -8,7 +8,7 @@ import {
   Input,
   Text,
 } from "@chakra-ui/react";
-import { useEffect, useState, Fragment } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 export default function ItemsList() {
@@ -20,8 +20,8 @@ export default function ItemsList() {
   const router = useRouter();
 
   function handleClick(test, index) {
-    console.log("clickname", test);
-    console.log("clickindex", index);
+    //console.log("clickname", test);
+    //console.log("clickindex", index);
 
     router.push({
       pathname: `/itemData/${index}`,
@@ -29,10 +29,10 @@ export default function ItemsList() {
   }
 
   const handleChange = (e, i, id, testName) => {
-    console.log("vip index change", id);
+    // console.log("vip index change", id);
     const { value, name } = e.target;
-    console.log("name", name);
-    console.log("value", value);
+    //  console.log("name", name);
+    // console.log("value", value);
     const newSales = [...sales];
 
     newSales[id] = {
@@ -42,9 +42,9 @@ export default function ItemsList() {
       updatedStocks: Number(value) + Number(newSales[id].totalStocks),
       stocksToAdd: Number(value),
     };
-    console.log("newSales", newSales);
+    //console.log("newSales", newSales);
     sales = newSales;
-    console.log("sales", sales);
+    // console.log("sales", sales);
     setSales(sales);
   };
 
@@ -60,7 +60,7 @@ export default function ItemsList() {
         updatedStocks: 0,
       };
       sales = newSales;
-      console.log("sales", sales);
+      //   console.log("sales", sales);
       setSales(sales);
       event.target.value = " ";
     }
@@ -84,22 +84,22 @@ export default function ItemsList() {
         }
         setSales(transformedSales);
         setIsLoading(false);
-        console.log("sss", transformedSales);
+        //  console.log("sss", transformedSales);
       });
   }, []);
 
   async function updateItemHandler(itemIndex) {
     const updatedIndex = itemIndex - 1;
-    console.log("itemIndex hereeee", updatedIndex);
+    //  console.log("itemIndex hereeee", updatedIndex);
 
-    console.log("sales[itemIndex ......]", sales[updatedIndex]);
+    //  console.log("sales[itemIndex ......]", sales[updatedIndex]);
     const updateObject = {
       id: sales[updatedIndex].id,
       stocksAdded: sales[updatedIndex].stocksAdded,
     };
 
-    console.log("sales[itemIndex]", sales[updatedIndex]);
-    console.log("update object", updateObject);
+    //console.log("sales[itemIndex]", sales[updatedIndex]);
+    //console.log("update object", updateObject);
     await fetch(`${process.env.APP_URL}/api/updateItem`, {
       method: "POST",
       body: JSON.stringify(updateObject),

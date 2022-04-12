@@ -12,13 +12,13 @@ export const serverSideRendering = async () => {
     `${process.env.APP_URL}/api/appVariablesGetDate`
   ).then((response) => {
     return response.json().then((data) => {
-      console.log("data look", data);
+      // console.log("data look", data);
 
       const myDate = new Date(data[0].date);
       return myDate;
     });
   });
-  console.log("getPreviousDate", new Date(getPreviousDate));
+  // console.log("getPreviousDate", new Date(getPreviousDate));
 
   const dateIndividualData = (singleDate) => {
     const dateObject = {
@@ -73,7 +73,7 @@ export const serverSideRendering = async () => {
       frequency: custFreq[key],
     });
   }
-  console.log("finalArray look", finalArray);
+  //console.log("finalArray look", finalArray);
 
   fetch(`${process.env.APP_URL}/api/optimizedUpdateItemStocks`, {
     method: "POST",
@@ -85,7 +85,7 @@ export const serverSideRendering = async () => {
     .then((data) => data.json())
     .then((data) => console.log("data here", data));
 
-  console.log("revalidate");
+  // console.log("revalidate");
 
   await fetch(`${process.env.APP_URL}/api/appVariablesUpdateDate`);
 

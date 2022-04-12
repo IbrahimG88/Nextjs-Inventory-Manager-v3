@@ -21,9 +21,9 @@ export default function App() {
 
   const handleKeyPress = (e, x) => {
     if (e.key === "Enter") {
-      console.log("You pressed a key.");
-      console.log("rowAddStocks", e.target.value);
-      console.log("x", x);
+      // console.log("You pressed a key.");
+      // console.log("rowAddStocks", e.target.value);
+      // console.log("x", x);
       e.target.value = "";
     }
   };
