@@ -11,7 +11,7 @@ module.exports = (phase) => {
 
   return {
     env: {
-      APP_URL: "moonlit-blancmange-cf4657.netlify.app",
+      APP_URL: "https://nextjs-inventory-manager.vercel.app/",
     },
   };
 };

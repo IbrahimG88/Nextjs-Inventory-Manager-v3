@@ -5,8 +5,6 @@ import { useRouter } from "next/router";
 import classes from "./auth-form.module.css";
 
 async function createUser(email, password) {
-  let dev = process.env.NODE_ENV !== "production";
-  let { DEV_URL, PROD_URL } = process.env;
   const response = await fetch(`${process.env.APP_URL}/api/auth/signup`, {
     method: "POST",
     body: JSON.stringify({ email, password }),
