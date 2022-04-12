@@ -5,6 +5,7 @@ module.exports = (phase) => {
     return {
       env: {
         APP_URL: "http://localhost:3000",
+        NEXTAUTH_URL: "https://nextjs-inventory-manager.vercel.app",
       },
     };
   }
