@@ -7,7 +7,7 @@ export const panelTypes = [];
 import { Text } from "@chakra-ui/react";
 import Link from "next/link";
 
-export const serverSideRendering = async () => {
+export const getServerSideProps = async () => {
   const getPreviousDate = await fetch(
     `${process.env.APP_URL}/api/appVariablesGetDate`
   ).then((response) => {
@@ -95,6 +95,7 @@ export const serverSideRendering = async () => {
 };
 
 export default function FrequencyWorklist({ finalArray }) {
+  console.log("finalArray", finalArray);
   return (
     <Text style={{ marginLeft: "50px" }}>
       <br />
