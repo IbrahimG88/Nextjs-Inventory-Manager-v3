@@ -7,7 +7,7 @@ export const panelTypes = [];
 import { Text } from "@chakra-ui/react";
 import Link from "next/link";
 
-export const getStaticProps = async () => {
+export const serverSideRendering = async () => {
   const getPreviousDate = await fetch(
     `${process.env.APP_URL}/api/appVariablesGetDate`
   ).then((response) => {
