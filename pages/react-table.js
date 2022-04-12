@@ -77,9 +77,7 @@ export default function App() {
 
   // Using useEffect to call the API once mounted and set the data
   useEffect(() => {
-    let dev = process.env.NODE_ENV !== "production";
-    let { DEV_URL, PROD_URL } = process.env;
-    fetch(`${dev ? DEV_URL : PROD_URL}api/getAllTestsHandler`)
+    fetch(`${process.env.APP_URL}api/getAllTestsHandler`)
       .then((response) => response.json())
       .then((data) => {
         //data from firebase will be returned as an object and nested ones
