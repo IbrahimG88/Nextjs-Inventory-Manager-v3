@@ -15,7 +15,8 @@ export default NextAuth({
   },
   providers: [
     CredentialsProvider({
-      async authorize(credentials) {
+      name: "Credentials",
+      async authorize(credentials, req) {
         const client = await connectToDatabase();
 
         const usersCollection = client.db().collection("users");
@@ -40,7 +41,8 @@ export default NextAuth({
         }
 
         client.close();
-        return { email: user.email };
+        return user;
+        // return { email: user.email };
       },
     }),
     /*
