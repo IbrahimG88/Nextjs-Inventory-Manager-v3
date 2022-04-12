@@ -11,7 +11,7 @@ module.exports = (phase) => {
 
   return {
     env: {
-      APP_URL: "nextjs-inventory-manager-mfdb1p0ep-ibrahimg88.vercel.app",
+      APP_URL: "https://nextjs-inventory-manager.vercel.app/",
     },
   };
 };

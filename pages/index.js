@@ -41,7 +41,7 @@ export const getStaticProps = async () => {
     return dateObject;
   };
 
-  const dateSample = dateIndividualData(getPreviousDate);
+  const dateSample = dateIndividualData(new Date(getPreviousDate));
   const res = await fetch(
     `http://197.45.107.206/api2/integration/worklist/${dateSample.year}-${
       dateSample.month
