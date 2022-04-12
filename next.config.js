@@ -12,6 +12,7 @@ module.exports = (phase) => {
   return {
     env: {
       APP_URL: "https://nextjs-inventory-manager.vercel.app",
+      NEXTAUTH_URL: "https://nextjs-inventory-manager.vercel.app",
     },
   };
 };
