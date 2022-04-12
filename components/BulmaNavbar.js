@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Image from "next/image";
 import Logo from "../public/Inventory-Manager-logos_black.png";
+import Link from "next/link";
 
 export default function BulmaNavBar() {
   return (
@@ -13,7 +14,7 @@ export default function BulmaNavBar() {
         style={{ backgroundColor: "bisque" }}
       >
         <div className="navbar-brand">
-          <a href="/">
+          <Link href="/" passHref>
             <Image
               src={Logo}
               alt="App Logo"
@@ -21,7 +22,7 @@ export default function BulmaNavBar() {
               height={100}
               styles={{ radios: "10px" }}
             />
-          </a>
+          </Link>
 
           <a
             role="button"
