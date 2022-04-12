@@ -1,22 +1,35 @@
-import { Text } from "@chakra-ui/react";
-import Link from "next/link";
+import { Fragment } from "react";
+
+import { useState } from "react";
 
 export const panelTypes = [];
 
-export async function getPreviousDate() {
-  await fetch(`${process.env.APP_URL}/api/appVariablesGetDate`).then(
-    (response) => {
-      return response.json().then((data) => {
-        console.log("data look", data);
+import { Text } from "@chakra-ui/react";
+import Link from "next/link";
 
-        const myDate = new Date(data[0].date);
-        return myDate;
-      });
-    }
-  );
-}
+export const getStaticProps = async () => {
+  const getPreviousDate = await fetch(
+    `${process.env.APP_URL}/api/appVariablesGetDate`
+  ).then((response) => {
+    return response.json().then((data) => {
+      console.log("data look", data);
 
-export async function consumptionDataFunction(dateSample) {
+      const myDate = new Date(data[0].date);
+      return myDate;
+    });
+  });
+  console.log("getPreviousDate", new Date(getPreviousDate));
+
+  const dateIndividualData = (singleDate) => {
+    const dateObject = {
+      day: singleDate.getDate() - 1,
+      month: singleDate.getMonth() + 1,
+      year: singleDate.getFullYear(),
+    };
+    console.log("today", dateObject.day);
+    return dateObject;
+  };
+
   const nowDate = () => {
     const now = new Date();
     const dateObject = {
@@ -27,7 +40,9 @@ export async function consumptionDataFunction(dateSample) {
     //console.log("today", dateObject.day);
     return dateObject;
   };
-  await fetch(
+
+  const dateSample = dateIndividualData(getPreviousDate);
+  const res = await fetch(
     `http://197.45.107.206/api2/integration/worklist/${dateSample.year}-${
       dateSample.month
     }-${dateSample.day}%2000:00:00:00/${nowDate().year}-${nowDate().month}-${
@@ -38,44 +53,9 @@ export async function consumptionDataFunction(dateSample) {
       return data;
     });
   });
-}
-
-export async function sendStockConsumptionData() {
-  await fetch(`${process.env.APP_URL}/api/optimizedUpdateItemStocks`, {
-    method: "POST",
-    body: JSON.stringify(finalArray),
-    headers: {
-      "content-Type": "application/json",
-    },
-  })
-    .then((data) => data.json())
-    .then((data) => console.log("data here", data));
-}
-
-export async function updateAppVariableDate() {
-  await fetch(`${process.env.APP_URL}/api/appVariablesUpdateDate`);
-}
-
-export const getStaticProps = async () => {
-  const previousDate = await getPreviousDate();
-
-  const dateIndividualData = async (singleDate) => {
-    const dateObject = await {
-      day: singleDate.getDate() - 1,
-      month: singleDate.getMonth() + 1,
-      year: singleDate.getFullYear(),
-    };
-    console.log("today", dateObject.day);
-    return dateObject;
-  };
-
-  const dateSample = dateIndividualData(previousDate);
-
-  const consumptionData = await consumptionDataFunction(dateSample);
-
-  for (const key in consumptionData) {
-    for (const myItem in consumptionData[key].panels) {
-      panelTypes.push(consumptionData[key].panels[myItem].report_name);
+  for (const key in res) {
+    for (const myItem in res[key].panels) {
+      panelTypes.push(res[key].panels[myItem].report_name);
     }
   }
 
@@ -95,57 +75,48 @@ export const getStaticProps = async () => {
   }
   console.log("finalArray look", finalArray);
 
-  sendStockConsumptionData();
+  fetch(`${process.env.APP_URL}/api/optimizedUpdateItemStocks`, {
+    method: "POST",
+    body: JSON.stringify(finalArray),
+    headers: {
+      "content-Type": "application/json",
+    },
+  })
+    .then((data) => data.json())
+    .then((data) => console.log("data here", data));
 
-  updateAppVariableDate();
+  console.log("revalidate");
+
+  await fetch(`${process.env.APP_URL}/api/appVariablesUpdateDate`);
 
   return {
     props: { finalArray },
   };
 };
 
-function FrequencyWorklist({ finalArray }) {
+export default function FrequencyWorklist({ finalArray }) {
   return (
-    <>
-      <Text style={{ marginLeft: "50px" }}>
-        <br />
-        <br />
-        Welcome to the <strong>Inventory Manager app</strong> that automates
-        inventory consumption data. You can search all test items and add the
-        corresponding stocks in the
-        <Link href="/accordion-updated" passHref>
-          <strong> add stocks </strong>
-        </Link>
-        section. You can view all tests inventory and amounts remaining for each
-        item in the
-        <Link href="/react-table" passHref>
+    <Text style={{ marginLeft: "50px" }}>
+      <br />
+      <br />
+      Welcome to the <strong>Inventory Manager app</strong> that automates
+      inventory consumption data. You can search all test items and add the
+      corresponding stocks in the
+      <Link href="/accordion-updated" passHref>
+        <strong> add stocks </strong>
+      </Link>
+      section. You can view all tests inventory and amounts remaining for each
+      item in the
+      <Link href="/react-table" passHref>
+        <a>
           <strong> Inventory </strong>
-        </Link>
-        module.
-        <br />
-        <br />
-        In the Inventory you can seacrh for items and click the column title to
-        enable sorting.
-      </Text>
-
-      <ul>
-        {finalArray.map((item) => (
-          <li key={item.name}>
-            {item.name}:{item.frequency}
-          </li>
-        ))}
-      </ul>
-    </>
+        </a>
+      </Link>
+      module.
+      <br />
+      <br />
+      In the Inventory you can seacrh for items and click the column title to
+      enable sorting.
+    </Text>
   );
 }
-
-export default FrequencyWorklist;
-/*
-   <ul>
-      {finalArray.map((item) => (
-        <li key={item.name}>
-          {item.name}:{item.frequency}
-        </li>
-      ))}
-    </ul>
-*/
