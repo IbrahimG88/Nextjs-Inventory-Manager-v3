@@ -26,8 +26,6 @@ export const getStaticProps = async () => {
 };
 
 function LoadInventoryFromLIS(props) {
-  let dev = process.env.NODE_ENV !== "production";
-  let { DEV_URL, PROD_URL } = process.env;
   const router = useRouter();
   const { testsList } = props;
   const [loading, setLoading] = useState(false);
@@ -37,7 +35,7 @@ function LoadInventoryFromLIS(props) {
     //console.log(testsList);
     // use of Fetch API to make a request to the new-meal api and get back a response
     await fetch(
-      `${dev ? DEV_URL : PROD_URL}/api/api-insert-test-mongo-check-first`,
+      `${process.env.APP_URL}/api/api-insert-test-mongo-check-first`,
       {
         method: "POST",
         body: JSON.stringify(testsList),
@@ -58,9 +56,7 @@ function LoadInventoryFromLIS(props) {
   }
 
   async function updateDateToNow() {
-    let dev = process.env.NODE_ENV !== "production";
-    let { DEV_URL, PROD_URL } = process.env;
-    await fetch(`${dev ? DEV_URL : PROD_URL}/api/appVariablesUpdateDate`);
+    await fetch(`${process.env.APP_URL}/api/appVariablesUpdateDate`);
   }
 
   if (!testsList) {

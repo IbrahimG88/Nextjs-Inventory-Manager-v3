@@ -53,7 +53,7 @@ function AuthForm() {
       if (!result.error) {
         // set some auth state
         // head to your app from here
-        router.push(`${dev ? DEV_URL : PROD_URL}/`);
+        router.push("/");
       } else if (result.error) {
         alert("Wrong email or password!");
       }

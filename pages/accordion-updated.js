@@ -67,10 +67,8 @@ export default function ItemsList() {
   };
 
   useEffect(() => {
-    let dev = process.env.NODE_ENV !== "production";
-    let { DEV_URL, PROD_URL } = process.env;
     setIsLoading(true);
-    fetch(`${dev ? DEV_URL : PROD_URL}/api/getAllTestsHandler`)
+    fetch(`${process.env.APP_URL}/api/getAllTestsHandler`)
       .then((response) => response.json())
       .then((data) => {
         //data from firebase will be returned as an object and nested ones
@@ -102,7 +100,7 @@ export default function ItemsList() {
 
     console.log("sales[itemIndex]", sales[updatedIndex]);
     console.log("update object", updateObject);
-    await fetch(`${dev ? DEV_URL : PROD_URL}/api/updateItem`, {
+    await fetch(`${process.env.APP_URL}/api/updateItem`, {
       method: "POST",
       body: JSON.stringify(updateObject),
       headers: {

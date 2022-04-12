@@ -1,13 +1,11 @@
-export const panelTypes = [];
-
 import { Text } from "@chakra-ui/react";
 import Link from "next/link";
 
+export const panelTypes = [];
+
 export const getStaticProps = async () => {
-  let dev = process.env.NODE_ENV !== "production";
-  let { DEV_URL, PROD_URL } = process.env;
   const getPreviousDate = await fetch(
-    `${dev ? DEV_URL : PROD_URL}/api/appVariablesGetDate`
+    `${process.env.APP_URL}/api/appVariablesGetDate`
   ).then((response) => {
     return response.json().then((data) => {
       console.log("data look", data);
@@ -73,7 +71,7 @@ export const getStaticProps = async () => {
   }
   console.log("finalArray look", finalArray);
 
-  fetch(`${dev ? DEV_URL : PROD_URL}/api/optimizedUpdateItemStocks`, {
+  fetch(`${process.env.APP_URL}/api/optimizedUpdateItemStocks`, {
     method: "POST",
     body: JSON.stringify(finalArray),
     headers: {
@@ -85,7 +83,7 @@ export const getStaticProps = async () => {
 
   console.log("revalidate");
 
-  fetch(`${dev ? DEV_URL : PROD_URL}/api/appVariablesUpdateDate`);
+  await fetch(`${process.env.APP_URL}/api/appVariablesUpdateDate`);
 
   return {
     props: { finalArray },
@@ -101,12 +99,12 @@ function FrequencyWorklist({ finalArray }) {
         Welcome to the <strong>Inventory Manager app</strong> that automates
         inventory consumption data. You can search all test items and add the
         corresponding stocks in the
-        <Link href="/accordion-updated" passHref>
+        <Link href={`${process.env.APP_URL}/accordion-updated`} passHref>
           <strong> add stocks </strong>
         </Link>
         section. You can view all tests inventory and amounts remaining for each
         item in the
-        <Link href="/react-table" passHref>
+        <Link href={`${dev ? DEV_URL : PROD_URL}/react-table`} passHref>
           <strong> Inventory </strong>
         </Link>
         module.
