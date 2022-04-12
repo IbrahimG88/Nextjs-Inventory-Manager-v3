@@ -14,15 +14,14 @@ export default function BulmaNavBar() {
         style={{ backgroundColor: "bisque" }}
       >
         <div className="navbar-brand">
-          <Link href="/" passHref>
-            <Image
-              src={Logo}
-              alt="App Logo"
-              width={100}
-              height={100}
-              styles={{ radios: "10px" }}
-            />
-          </Link>
+          <Image
+            href="/"
+            src={Logo}
+            alt="App Logo"
+            width={100}
+            height={100}
+            styles={{ radios: "10px" }}
+          />
 
           <Link
             role="button"
@@ -38,7 +37,7 @@ export default function BulmaNavBar() {
         </div>
 
         <div id="navbarBasicExample" className="navbar-menu">
-          <div className="navbar-start">
+          {/* <div className="navbar-start">
             <Link className="navbar-item">Documentation</Link>
 
             <Link className="navbar-item">About</Link>
@@ -55,6 +54,7 @@ export default function BulmaNavBar() {
               </div>
             </div>
           </div>
+          */}
 
           <div className="navbar-end">
             <div className="navbar-item">

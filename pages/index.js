@@ -99,12 +99,12 @@ function FrequencyWorklist({ finalArray }) {
         Welcome to the <strong>Inventory Manager app</strong> that automates
         inventory consumption data. You can search all test items and add the
         corresponding stocks in the
-        <Link href={`${process.env.APP_URL}/accordion-updated`} passHref>
+        <Link href="/accordion-updated" passHref>
           <strong> add stocks </strong>
         </Link>
         section. You can view all tests inventory and amounts remaining for each
         item in the
-        <Link href={`${dev ? DEV_URL : PROD_URL}/react-table`} passHref>
+        <Link href="/react-table" passHref>
           <strong> Inventory </strong>
         </Link>
         module.

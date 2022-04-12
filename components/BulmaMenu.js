@@ -2,20 +2,17 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function BulmaMenu() {
-  let dev = process.env.NODE_ENV !== "production";
-  let { DEV_URL, PROD_URL } = process.env;
-
-  const [isActive, setActive] = useState("Update tests list");
+  const [isActive, setActive] = useState("Home");
 
   const data = [
-    { link: `${dev ? DEV_URL : PROD_URL}/`, label: "Home" },
-    { link: `${dev ? DEV_URL : PROD_URL}/react-table`, label: "Inventory" },
+    { link: "/", label: "Home" },
+    { link: "/react-table", label: "Inventory" },
     {
-      link: `${dev ? DEV_URL : PROD_URL}/accordion-updated`,
+      link: "/accordion-updated",
       label: "Add Stocks",
     },
     {
-      link: `${dev ? DEV_URL : PROD_URL}/load-inventory-from-lis`,
+      link: "/load-inventory-from-lis",
       label: "Update tests list",
     },
   ];
