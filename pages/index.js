@@ -3,29 +3,20 @@ import Link from "next/link";
 
 export const panelTypes = [];
 
-export const getStaticProps = async () => {
-  const getPreviousDate = await fetch(
-    `${process.env.APP_URL}/api/appVariablesGetDate`
-  ).then((response) => {
-    return response.json().then((data) => {
-      console.log("data look", data);
+export async function getPreviousDate() {
+  await fetch(`${process.env.APP_URL}/api/appVariablesGetDate`).then(
+    (response) => {
+      return response.json().then((data) => {
+        console.log("data look", data);
 
-      const myDate = new Date(data[0].date);
-      return myDate;
-    });
-  });
-  console.log("getPreviousDate", new Date(getPreviousDate));
+        const myDate = new Date(data[0].date);
+        return myDate;
+      });
+    }
+  );
+}
 
-  const dateIndividualData = (singleDate) => {
-    const dateObject = {
-      day: singleDate.getDate() - 1,
-      month: singleDate.getMonth() + 1,
-      year: singleDate.getFullYear(),
-    };
-    console.log("today", dateObject.day);
-    return dateObject;
-  };
-
+export async function consumptionDataFunction(dateSample) {
   const nowDate = () => {
     const now = new Date();
     const dateObject = {
@@ -36,9 +27,7 @@ export const getStaticProps = async () => {
     //console.log("today", dateObject.day);
     return dateObject;
   };
-
-  const dateSample = dateIndividualData(getPreviousDate);
-  const res = await fetch(
+  await fetch(
     `http://197.45.107.206/api2/integration/worklist/${dateSample.year}-${
       dateSample.month
     }-${dateSample.day}%2000:00:00:00/${nowDate().year}-${nowDate().month}-${
@@ -49,9 +38,44 @@ export const getStaticProps = async () => {
       return data;
     });
   });
-  for (const key in res) {
-    for (const myItem in res[key].panels) {
-      panelTypes.push(res[key].panels[myItem].report_name);
+}
+
+export async function sendStockConsumptionData() {
+  await fetch(`${process.env.APP_URL}/api/optimizedUpdateItemStocks`, {
+    method: "POST",
+    body: JSON.stringify(finalArray),
+    headers: {
+      "content-Type": "application/json",
+    },
+  })
+    .then((data) => data.json())
+    .then((data) => console.log("data here", data));
+}
+
+export async function updateAppVariableDate() {
+  await fetch(`${process.env.APP_URL}/api/appVariablesUpdateDate`);
+}
+
+export const getStaticProps = async () => {
+  const previousDate = await getPreviousDate();
+
+  const dateIndividualData = async (singleDate) => {
+    const dateObject = await {
+      day: singleDate.getDate() - 1,
+      month: singleDate.getMonth() + 1,
+      year: singleDate.getFullYear(),
+    };
+    console.log("today", dateObject.day);
+    return dateObject;
+  };
+
+  const dateSample = dateIndividualData(previousDate);
+
+  const consumptionData = await consumptionDataFunction(dateSample);
+
+  for (const key in consumptionData) {
+    for (const myItem in consumptionData[key].panels) {
+      panelTypes.push(consumptionData[key].panels[myItem].report_name);
     }
   }
 
@@ -71,19 +95,9 @@ export const getStaticProps = async () => {
   }
   console.log("finalArray look", finalArray);
 
-  fetch(`${process.env.APP_URL}/api/optimizedUpdateItemStocks`, {
-    method: "POST",
-    body: JSON.stringify(finalArray),
-    headers: {
-      "content-Type": "application/json",
-    },
-  })
-    .then((data) => data.json())
-    .then((data) => console.log("data here", data));
+  sendStockConsumptionData();
 
-  console.log("revalidate");
-
-  await fetch(`${process.env.APP_URL}/api/appVariablesUpdateDate`);
+  updateAppVariableDate();
 
   return {
     props: { finalArray },

@@ -3,6 +3,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import Image from "next/image";
 import Logo from "../public/Inventory-Manager-logos_black.png";
 import Link from "next/link";
+import { Button } from "@chakra-ui/react";
 
 export default function BulmaNavBar() {
   return (
@@ -15,7 +16,6 @@ export default function BulmaNavBar() {
       >
         <div className="navbar-brand">
           <Image
-            href="/"
             src={Logo}
             alt="App Logo"
             width={100}
@@ -23,7 +23,7 @@ export default function BulmaNavBar() {
             styles={{ radios: "10px" }}
           />
 
-          <Link
+          <a
             role="button"
             className="navbar-burger"
             aria-label="menu"
@@ -33,35 +33,16 @@ export default function BulmaNavBar() {
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
-          </Link>
+          </a>
         </div>
 
         <div id="navbarBasicExample" className="navbar-menu">
-          {/* <div className="navbar-start">
-            <Link className="navbar-item">Documentation</Link>
-
-            <Link className="navbar-item">About</Link>
-
-            <div className="navbar-item has-dropdown is-hoverable">
-              <Link className="navbar-link">Contact us</Link>
-
-              <div className="navbar-dropdown">
-                <Link className="navbar-item">About</Link>
-                <Link className="navbar-item">Jobs</Link>
-                <Link className="navbar-item">Contact</Link>
-                <hr className="navbar-divider" />
-                <Link className="navbar-item">Report an issue</Link>
-              </div>
-            </div>
-          </div>
-          */}
-
           <div className="navbar-end">
             <div className="navbar-item">
               <div className="buttons">
-                <Link className="button is-light" onClick={() => signOut()}>
+                <Button className="button is-light" onClick={() => signOut()}>
                   Sign out
-                </Link>
+                </Button>
               </div>
             </div>
           </div>
