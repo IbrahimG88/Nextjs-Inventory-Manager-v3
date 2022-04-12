@@ -102,7 +102,7 @@ export default function ItemsList() {
 
     console.log("sales[itemIndex]", sales[updatedIndex]);
     console.log("update object", updateObject);
-    await fetch("https://nextjs-inventory-manager.vercel.app/api/updateItem", {
+    await fetch(`${dev ? DEV_URL : PROD_URL}/api/updateItem`, {
       method: "POST",
       body: JSON.stringify(updateObject),
       headers: {
