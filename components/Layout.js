@@ -17,7 +17,10 @@ export default function Layout({ children }) {
         <br />
         <Button
           onClick={() => setMenuToggle(!menuToggle)}
-          style={{ marginLeft: "20px" }}
+          style={{
+            marginLeft: "20px",
+            marginBottom: "20px",
+          }}
         >
           Toggle Menu
         </Button>
