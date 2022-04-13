@@ -2,12 +2,11 @@ import { Fragment } from "react";
 
 import { useState } from "react";
 
-export const panelTypes = [];
-
 import { Text } from "@chakra-ui/react";
 import Link from "next/link";
 
 export const getServerSideProps = async () => {
+  const panelTypes = [];
   const getPreviousDate = await fetch(
     `${process.env.APP_URL}/api/appVariablesGetDate`
   ).then((response) => {
@@ -25,19 +24,23 @@ export const getServerSideProps = async () => {
       day: singleDate.getDate() - 1,
       month: singleDate.getMonth() + 1,
       year: singleDate.getFullYear(),
+      hours: singleDate.getHours(),
+      minute: singleDate.getMinutes(),
     };
-    console.log("today", dateObject.day);
+    console.log("singleDate", dateObject);
     return dateObject;
   };
 
   const nowDate = () => {
     const now = new Date();
     const dateObject = {
-      day: now.getDate(),
+      day: now.getDate() - 1,
       month: now.getMonth() + 1,
       year: now.getFullYear(),
+      hours: now.getHours(),
+      minute: now.getMinutes(),
     };
-    //console.log("today", dateObject.day);
+    console.log("now dateobject", dateObject);
     return dateObject;
   };
 
@@ -45,9 +48,11 @@ export const getServerSideProps = async () => {
   const res = await fetch(
     `http://197.45.107.206/api2/integration/worklist/${dateSample.year}-${
       dateSample.month
-    }-${dateSample.day}%2000:00:00:00/${nowDate().year}-${nowDate().month}-${
-      nowDate().day
-    }%2000:00:00:00`,
+    }-${dateSample.day}%20${dateSample.hour}:${dateSample.minute}:00:00/${
+      nowDate().year
+    }-${nowDate().month}-${nowDate().day}%20${nowDate().hours}:${
+      nowDate().minute
+    }:00:00`,
     { mode: "cors" }
   ).then((response) => {
     return response.json().then((data) => {
