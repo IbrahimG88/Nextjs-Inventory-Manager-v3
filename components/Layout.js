@@ -29,7 +29,7 @@ export default function Layout({ children }) {
           <Head>
             <title>Invnetory Manager</title>
           </Head>
-          <main style={{ marginRight: "20px" }}>{children}</main>
+          <main style={{ margin: "auto" }}>{children}</main>
         </div>
         <Footer />
       </>
