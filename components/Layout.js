@@ -16,7 +16,7 @@ export default function Layout({ children }) {
           <Head>
             <title>Invnetory Manager</title>
           </Head>
-          <main>{children}</main>
+          <main style={{ marginRight: "20px" }}>{children}</main>
         </div>
         <Footer />
       </>
