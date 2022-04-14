@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { useState } from "react";
+import { useSession, signIn, signOut } from "next-auth/react";
+import { Button } from "@chakra-ui/react";
 
 export default function BulmaMenu() {
   const [isActive, setActive] = useState("Home");
@@ -40,6 +42,10 @@ export default function BulmaMenu() {
             </Link>
           </li>
         ))}
+        <p className="menu-label ">Profile</p>
+        <Button colorScheme="teal" variant="ghost" onClick={() => signOut()}>
+          Sign out
+        </Button>
       </ul>
     </aside>
   );

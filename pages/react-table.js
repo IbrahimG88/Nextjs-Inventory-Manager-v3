@@ -138,11 +138,14 @@ export default function App() {
 
   return (
     <Fragment>
-      <div style={{ display: "flex", flexDirection: "row" }}>
+      <div
+        style={{ display: "flex", flexDirection: "row", marginBottom: "10px" }}
+      >
         <Input
           value={filterInputTest}
           onChange={handleFilterChange}
           placeholder={"Search testname"}
+          style={{ display: "flex", flexDirection: "row", marginRight: "10px" }}
         />
         <Input
           value={filterInputId}
