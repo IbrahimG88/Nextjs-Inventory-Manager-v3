@@ -28,18 +28,26 @@ export default function ItemsList() {
     });
   }
 
-  const handleChange = (e, i, id, testName) => {
-    // console.log("vip index change", id);
+  const handleChange = (e, id) => {
+    console.log("vip index change", id);
+
+    const myIndexOfItem = sales.findIndex((x) => x.id === id);
+    // we need to find index of our item from the filter in the sales array,
+    // we need something like index of
+
+    console.log("sales", sales);
+
     const { value, name } = e.target;
     //  console.log("name", name);
     // console.log("value", value);
     const newSales = [...sales];
 
-    newSales[id] = {
-      ...newSales[id],
+    newSales[myIndexOfItem] = {
+      ...newSales[myIndexOfItem],
       [name]: value,
-      totalStocks: Number(newSales[id].totalStocks),
-      updatedStocks: Number(value) + Number(newSales[id].totalStocks),
+      totalStocks: Number(newSales[myIndexOfItem].totalStocks),
+      updatedStocks:
+        Number(value) + Number(newSales[myIndexOfItem].totalStocks),
       stocksToAdd: Number(value),
     };
     //console.log("newSales", newSales);
@@ -48,15 +56,17 @@ export default function ItemsList() {
     setSales(sales);
   };
 
-  const handleKeyDown = (event, index, id) => {
+  const handleKeyDown = (event, id) => {
+    const myIndexOfItem = sales.findIndex((x) => x.id === id);
+
     if (event.key === "Enter") {
-      updateItemHandler(id + 1);
+      updateItemHandler(myIndexOfItem);
       const newSales = [...sales];
 
-      newSales[id] = {
+      newSales[myIndexOfItem] = {
         ...newSales[id],
 
-        totalStocks: Number(newSales[id].updatedStocks),
+        totalStocks: Number(newSales[myIndexOfItem].updatedStocks),
         updatedStocks: 0,
       };
       sales = newSales;
@@ -82,6 +92,7 @@ export default function ItemsList() {
             date: data[key].date,
           });
         }
+
         setSales(transformedSales);
         setIsLoading(false);
         //  console.log("sss", transformedSales);
@@ -89,15 +100,14 @@ export default function ItemsList() {
   }, []);
 
   async function updateItemHandler(itemIndex) {
-    const updatedIndex = itemIndex - 1;
     //  console.log("itemIndex hereeee", updatedIndex);
 
     //  console.log("sales[itemIndex ......]", sales[updatedIndex]);
     const updateObject = {
-      id: sales[updatedIndex].id,
-      stocksAdded: sales[updatedIndex].stocksAdded,
+      id: sales[itemIndex].id,
+      stocksAdded: sales[itemIndex].stocksAdded,
     };
-
+    console.log("updateObject", updateObject);
     //console.log("sales[itemIndex]", sales[updatedIndex]);
     //console.log("update object", updateObject);
     await fetch(`${process.env.APP_URL}/api/updateItem`, {
@@ -136,7 +146,7 @@ export default function ItemsList() {
           sales
             .filter((f) => f.testName.toLowerCase().indexOf(filter) > -1)
             .map((item, index) => (
-              <AccordionItem key={item.id}>
+              <AccordionItem key={item._id}>
                 <h2>
                   <AccordionButton _expanded={{ bg: "blue", color: "white" }}>
                     <Box flex="1" textAlign="left">
@@ -153,10 +163,8 @@ export default function ItemsList() {
                     name="stocksAdded"
                     id="stocksAdded"
                     value={amountsInput}
-                    onChange={(e) =>
-                      handleChange(e, index, item.id - 1, item.testName)
-                    }
-                    onKeyDown={(e) => handleKeyDown(e, index, item.id - 1)}
+                    onChange={(e) => handleChange(e, item.id, item.testName)}
+                    onKeyDown={(e) => handleKeyDown(e, item.id)}
                   />
                   {item.updatedStocks ? (
                     <Text>
