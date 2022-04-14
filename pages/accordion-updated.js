@@ -50,7 +50,7 @@ export default function ItemsList() {
         Number(value) + Number(newSales[myIndexOfItem].totalStocks),
       stocksToAdd: Number(value),
     };
-    //console.log("newSales", newSales);
+    console.log("newSalesmyIndexOfItem", newSales[myIndexOfItem]);
     sales = newSales;
     // console.log("sales", sales);
     setSales(sales);
@@ -64,10 +64,9 @@ export default function ItemsList() {
       const newSales = [...sales];
 
       newSales[myIndexOfItem] = {
-        ...newSales[id],
+        ...newSales[myIndexOfItem],
 
         totalStocks: Number(newSales[myIndexOfItem].updatedStocks),
-        updatedStocks: 0,
       };
       sales = newSales;
       //   console.log("sales", sales);
@@ -166,14 +165,15 @@ export default function ItemsList() {
                     onChange={(e) => handleChange(e, item.id, item.testName)}
                     onKeyDown={(e) => handleKeyDown(e, item.id)}
                   />
+                  {item.totalStocks ? (
+                    <Text>Previous Total Stocks: {item.totalStocks}</Text>
+                  ) : null}
                   {item.updatedStocks ? (
                     <Text>
-                      Updated Total Stocks: {item.totalStocks} +{" "}
-                      {item.stocksToAdd} = {item.updatedStocks}
+                      Updated Total Stocks:
+                      {item.updatedStocks}
                     </Text>
-                  ) : (
-                    <Text>Previous Total Stocks: {item.totalStocks}</Text>
-                  )}
+                  ) : null}
                 </AccordionPanel>
               </AccordionItem>
             ))
