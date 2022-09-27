@@ -31,7 +31,6 @@ export default function Layout({ children }) {
           </Head>
           <main style={{ margin: "auto" }}>{children}</main>
         </div>
-        <Footer />
       </>
     );
   }
