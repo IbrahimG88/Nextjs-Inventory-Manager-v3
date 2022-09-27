@@ -48,7 +48,7 @@ export const getServerSideProps = async () => {
   const res = await fetch(
     `http://197.45.107.206/api2/integration/worklist/${dateSample.year}-${
       dateSample.month
-    }-${dateSample.day}%20${dateSample.hour}:${dateSample.minute}:00:00/${
+    }-${dateSample.day}%20${dateSample.hours}:${dateSample.minute}:00:00/${
       nowDate().year
     }-${nowDate().month}-${nowDate().day}%20${nowDate().hours}:${
       nowDate().minute
