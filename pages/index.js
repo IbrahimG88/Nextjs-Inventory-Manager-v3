@@ -21,7 +21,7 @@ export const getServerSideProps = async () => {
 
   const dateIndividualData = (singleDate) => {
     const dateObject = {
-      day: singleDate.getDate() - 1,
+      day: singleDate.getDate() ,
       month: singleDate.getMonth() + 1,
       year: singleDate.getFullYear(),
       hours: singleDate.getHours(),
@@ -34,7 +34,7 @@ export const getServerSideProps = async () => {
   const nowDate = () => {
     const now = new Date();
     const dateObject = {
-      day: now.getDate() - 1,
+      day: now.getDate() ,
       month: now.getMonth() + 1,
       year: now.getFullYear(),
       hours: now.getHours(),
