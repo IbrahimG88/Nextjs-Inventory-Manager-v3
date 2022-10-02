@@ -7,6 +7,7 @@ import Link from "next/link";
 
 export const getServerSideProps = async () => {
   const panelTypes = [];
+  let numberOfRegisteredPatients;
   const getPreviousDate = await fetch(
     `${process.env.APP_URL}/api/appVariablesGetDate`
   ).then((response) => {
@@ -14,6 +15,15 @@ export const getServerSideProps = async () => {
       // console.log("data look", data);
 
       const myDate = new Date(data[0].date);
+
+      const testDateObject = {
+        day: myDate.getDate(),
+        month: myDate.getMonth() + 1,
+        year: myDate.getFullYear(),
+        hours: myDate.getHours(),
+        minute: myDate.getMinutes(),
+      };
+      console.log("testdateObject", testDateObject);
       return myDate;
     });
   });
@@ -21,7 +31,7 @@ export const getServerSideProps = async () => {
 
   const dateIndividualData = (singleDate) => {
     const dateObject = {
-      day: singleDate.getDate() ,
+      day: singleDate.getDate(),
       month: singleDate.getMonth() + 1,
       year: singleDate.getFullYear(),
       hours: singleDate.getHours(),
@@ -34,17 +44,18 @@ export const getServerSideProps = async () => {
   const nowDate = () => {
     const now = new Date();
     const dateObject = {
-      day: now.getDate() ,
+      day: now.getDate(),
       month: now.getMonth() + 1,
       year: now.getFullYear(),
       hours: now.getHours(),
       minute: now.getMinutes(),
     };
-    console.log("now dateobject", dateObject);
+    console.log("currentTest", dateObject);
     return dateObject;
   };
 
   const dateSample = dateIndividualData(new Date(getPreviousDate));
+
   const res = await fetch(
     `http://197.45.107.206/api2/integration/worklist/${dateSample.year}-${
       dateSample.month
@@ -56,9 +67,13 @@ export const getServerSideProps = async () => {
     { mode: "cors" }
   ).then((response) => {
     return response.json().then((data) => {
+      console.log("data", data);
+      console.log("nowDate function call", nowDate().minute);
       return data;
     });
   });
+  console.log("res.length for number of patients", res.length);
+  numberOfRegisteredPatients = res.length;
   for (const key in res) {
     for (const myItem in res[key].panels) {
       panelTypes.push(res[key].panels[myItem].report_name);
@@ -79,7 +94,12 @@ export const getServerSideProps = async () => {
       frequency: custFreq[key],
     });
   }
-  //console.log("finalArray look", finalArray);
+
+  finalArray.push({
+    name: "Syringes",
+    frequency: res.length,
+  });
+  console.log("finalArray look", finalArray);
 
   fetch(`${process.env.APP_URL}/api/optimizedUpdateItemStocks`, {
     method: "POST",
@@ -127,3 +147,5 @@ export default function FrequencyWorklist({ finalArray }) {
     </Text>
   );
 }
+
+// remmeber if you reset the syringes from database hardtype it in the database
