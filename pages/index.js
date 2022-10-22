@@ -95,10 +95,12 @@ export const getServerSideProps = async () => {
     });
   }
 
-  finalArray.push({
-    name: "Syringes",
-    frequency: res.length,
-  });
+  if (res.length >= 1) {
+    finalArray.push({
+      name: "Syringes",
+      frequency: res.length,
+    });
+  }
   console.log("finalArray look", finalArray);
 
   fetch(`${process.env.APP_URL}/api/optimizedUpdateItemStocks`, {
