@@ -98,7 +98,7 @@ export const getServerSideProps = async () => {
   if (res.length >= 1) {
     finalArray.push({
       name: "Syringes",
-      frequency: res.length,
+     frequency: Number(res.length),
     });
   }
   console.log("finalArray look", finalArray);
