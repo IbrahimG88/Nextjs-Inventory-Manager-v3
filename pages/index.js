@@ -86,21 +86,20 @@ export const getServerSideProps = async () => {
     return acc;
   }, {});
 
- const finalArray = [];
+  const finalArray = [];
 
   for (const key in custFreq) {
     finalArray.push({
       name: key,
       frequency: custFreq[key],
     });
-  
   }
-  finalArray.push({
-    name: "Syringes",
-    frequency: Number(res.length),
-  })
+  if (res.length >= 1) {
+    finalArray.push({
+      name: "Syringes",
+      frequency: res.length,
+    });
   }
-
 
   console.log("finalArray look", finalArray);
 
