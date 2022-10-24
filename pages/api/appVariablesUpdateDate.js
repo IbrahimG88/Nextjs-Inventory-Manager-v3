@@ -23,7 +23,7 @@ export default async (req, res) => {
     .collection("appVariables")
     .updateOne(
       { variableType: "date" },
-      { $set: { date: date.toLocaleString() } },
+      { $set: { date: date } },
       { upsert: true }
     );
   return res.json(item);
