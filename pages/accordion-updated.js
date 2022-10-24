@@ -162,12 +162,8 @@ export default function ItemsList() {
                     name="stocksAdded"
                     id="stocksAdded"
                     value={amountsInput}
-                    onChange={(e) =>
-                      setTimeOut(handleChange(e, item.id, item.testName), 1500)
-                    }
-                    onKeyDown={(e) =>
-                      setTimeOut(handleKeyDown(e, item.id), 1500)
-                    }
+                    onChange={(e) => handleChange(e, item.id, item.testName)}
+                    onKeyDown={(e) => handleKeyDown(e, item.id)}
                   />
                   {item.totalStocks ? (
                     <Text>Previous Total Stocks: {item.totalStocks}</Text>
