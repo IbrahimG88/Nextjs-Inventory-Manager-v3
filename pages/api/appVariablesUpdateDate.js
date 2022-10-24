@@ -16,7 +16,7 @@ const cors = initMiddleware(
 export default async (req, res) => {
   await cors(req, res);
 
-  const date = new Date();.toLocaleString()
+  const date = new Date().toLocaleString()
   const client = await connectToDatabase();
   const db = client.db();
   const item = await db
