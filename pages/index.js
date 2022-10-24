@@ -95,12 +95,12 @@ export const getServerSideProps = async () => {
       frequency: custFreq[key],
     });
   }
-
-  finalArray.push({
-    name: "Syringes",
-    frequency: res.length,
-  });
-
+  if (res.length > 0) {
+    finalArray.push({
+      name: "Syringes",
+      frequency: res.length,
+    });
+  }
   console.log("finalArray look", finalArray);
 
   fetch(`${process.env.APP_URL}/api/optimizedUpdateItemStocks`, {
