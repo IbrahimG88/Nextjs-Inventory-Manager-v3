@@ -18,11 +18,11 @@ export default async (req, res) => {
 
   // const date = new Date().toLocaleString();
 
-  //const date = new Date();
- // date.setHours(date.getHours() + 2);
-  //const finalDate = date.toLocaleString();
+  const date = new Date();
+  date.setHours(date.getHours() + 2);
+  const finalDate = date.toLocaleString();
   
-   const date = new Date().toLocaleString();
+  / const date = new Date().toLocaleString();
 
   const client = await connectToDatabase();
   const db = client.db();
@@ -30,7 +30,7 @@ export default async (req, res) => {
     .collection("appVariables")
     .updateOne(
       { variableType: "date" },
-      { $set: { date: date } },
+      { $set: { date: finalDate } },
       { upsert: true }
     );
   return res.json(item);
