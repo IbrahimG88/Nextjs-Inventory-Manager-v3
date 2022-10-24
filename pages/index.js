@@ -20,9 +20,11 @@ export const getServerSideProps = async () => {
         day: myDate.getDate(),
         month: myDate.getMonth() + 1,
         year: myDate.getFullYear(),
-        hours: myDate.getHours() +2, //added two hours to compensate the 2 hours late from database
+        hours: myDate.getHours(), 
         minute: myDate.getMinutes(),
       };
+       myDate.setHours(myDate.getHours() + 2); // to compensate for the 2 hours less on the database
+
       console.log("testdateObject", testDateObject);
       return myDate;
     });
