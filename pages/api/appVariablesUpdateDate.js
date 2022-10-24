@@ -18,19 +18,20 @@ export default async (req, res) => {
 
   // const date = new Date().toLocaleString();
 
-  const date = new Date().toLocaleString();
-  const finalDate = date.setHours(date.getHours() + 2);
+ // const date = new Date().toLocaleString();
+  //const finalDate = date.setHours(date.getHours() + 2);
 
   
   // const date = new Date().toLocaleString();
 
+  const date = new Date()
   const client = await connectToDatabase();
   const db = client.db();
   const item = await db
     .collection("appVariables")
     .updateOne(
       { variableType: "date" },
-      { $set: { date: finalDate } },
+      { $set: { date: date } },
       { upsert: true }
     );
   return res.json(item);
