@@ -18,9 +18,9 @@ export default async (req, res) => {
 
   // const date = new Date().toLocaleString();
 
-  const date = new Date();
-  date.setHours(date.getHours() + 2);
-  const finalDate = date.toLocaleString();
+  const date = new Date().toLocaleString();
+  const finalDate = date.setHours(date.getHours() + 2);
+
   
   // const date = new Date().toLocaleString();
 
