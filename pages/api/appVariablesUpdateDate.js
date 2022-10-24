@@ -16,15 +16,16 @@ const cors = initMiddleware(
 export default async (req, res) => {
   await cors(req, res);
 
-  const date = new Date().getTime();
-  const updatedDate =  new Date(date + 2 * 60 * 60 * 1000) // adds 2 hours to time
+     const date = new Date();
+     date.setHours(date.getHours() + 2);
+     const finalDate = date.toLocaleTimeString(); 
   const client = await connectToDatabase();
   const db = client.db();
   const item = await db
     .collection("appVariables")
     .updateOne(
       { variableType: "date" },
-      { $set: { date: updatedDate } },
+      { $set: { date: finalDate } },
       { upsert: true }
     );
   return res.json(item);
