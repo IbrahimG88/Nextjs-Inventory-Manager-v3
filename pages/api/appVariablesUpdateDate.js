@@ -16,9 +16,12 @@ const cors = initMiddleware(
 export default async (req, res) => {
   await cors(req, res);
 
-     const date = new Date();
-     date.setHours(date.getHours() + 2);
-     const finalDate = date.toLocaleString(); 
+  // const date = new Date().toLocaleString();
+
+  const date = new Date();
+  date.setHours(date.getHours() + 2);
+  const finalDate = date.toLocaleString();
+
   const client = await connectToDatabase();
   const db = client.db();
   const item = await db
@@ -30,6 +33,3 @@ export default async (req, res) => {
     );
   return res.json(item);
 };
-
-//sets a new Date put it down at the end
-//set app region for similar time on app
