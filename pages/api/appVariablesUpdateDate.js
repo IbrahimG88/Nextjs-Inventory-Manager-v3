@@ -16,14 +16,14 @@ const cors = initMiddleware(
 export default async (req, res) => {
   await cors(req, res);
 
-  const date = new Date();
+  const date = new Date();.toLocaleString()
   const client = await connectToDatabase();
   const db = client.db();
   const item = await db
     .collection("appVariables")
     .updateOne(
       { variableType: "date" },
-      { $set: { date: date.toLocaleString() } },
+      { $set: { date: date } },
       { upsert: true }
     );
   return res.json(item);
