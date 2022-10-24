@@ -18,7 +18,7 @@ export default async (req, res) => {
 
      const date = new Date();
      date.setHours(date.getHours() + 2);
-     const finalDate = date.toLocaleTimeString(); 
+     const finalDate = date.toLocaleString(); 
   const client = await connectToDatabase();
   const db = client.db();
   const item = await db
