@@ -25,7 +25,7 @@ export const getServerSideProps = async () => {
       };
       
       console.log("testdateObject", testDateObject);
-     const updatedDate  myDate.setHours(date.getHours() + 2);
+     const updatedDate = myDate.setHours(date.getHours() + 2);
       const finalDate =updatedDate.toLocaleString();
       return finalDate;
     });
