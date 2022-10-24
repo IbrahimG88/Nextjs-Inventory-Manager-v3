@@ -24,14 +24,17 @@ export default async (req, res) => {
   
   // const date = new Date().toLocaleString();
 
-  const date = new Date()
+  //const date = new Date()
+  
+  const d = new Date();
+  const s = d.toLocaleString(undefined,{timeZone:"Africa/Cairo"});
   const client = await connectToDatabase();
   const db = client.db();
   const item = await db
     .collection("appVariables")
     .updateOne(
       { variableType: "date" },
-      { $set: { date: date } },
+      { $set: { date: s } },
       { upsert: true }
     );
   return res.json(item);
