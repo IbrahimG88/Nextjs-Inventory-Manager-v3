@@ -37,7 +37,7 @@ export const getServerSideProps = async () => {
       hours: singleDate.getHours(),
       minute: singleDate.getMinutes(),
     };
-    console.log("singleDate", dateObject);
+    console.log("dateObject", dateObject);
     return dateObject;
   };
 
@@ -50,11 +50,12 @@ export const getServerSideProps = async () => {
       hours: now.getHours(),
       minute: now.getMinutes(),
     };
-    console.log("currentTest", dateObject);
+    console.log("now date", dateObject);
     return dateObject;
   };
 
   const dateSample = dateIndividualData(new Date(getPreviousDate));
+  console.log("dateSample", dateSample);
 
   const res = await fetch(
     `http://197.45.107.206/api2/integration/worklist/${dateSample.year}-${
@@ -95,6 +96,10 @@ export const getServerSideProps = async () => {
     });
   }
 
+  finalArray.push({
+    name: "Syringes",
+    frequency: res.length,
+  });
 
   console.log("finalArray look", finalArray);
 
