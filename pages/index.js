@@ -42,12 +42,13 @@ export const getServerSideProps = async () => {
   };
   
   
-  const addHours = (date, hours) => {
-  date.setHours(date.getHours() + hours);
-  return date;
-}
+
 
   const nowDate = () => {
+      const addHours = (date, hours) => {
+      date.setHours(date.getHours() + hours);
+      return date;
+      }
     const date = new Date();
         const hoursAddedDate = addHours(date, 2); // adds 2 hours
     const dateObject = {
