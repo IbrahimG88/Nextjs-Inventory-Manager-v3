@@ -44,11 +44,11 @@ export const getServerSideProps = async () => {
   const nowDate = () => {
     const date = new Date();
     const dateObject = {
-      day: s.getDate(),
-      month: s.getMonth() + 1,
-      year: s.getFullYear(),
-      hours: s.getHours() +2,
-      minute: s.getMinutes(),
+      day: date.getDate(),
+      month: date.getMonth() + 1,
+      year: date.getFullYear(),
+      hours: date.getHours() +2,
+      minute: date.getMinutes(),
     };
     console.log("now date", dateObject);
     return dateObject;
