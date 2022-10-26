@@ -40,20 +40,42 @@ export const getServerSideProps = async () => {
     console.log("dateObject", dateObject);
     return dateObject;
   };
+  
+  
+  const addHours = (date, hours) => {
+  date.setHours(date.getHours() + hours);
+  return date;
+}
 
   const nowDate = () => {
     const date = new Date();
+        const hoursAddedDate = addHours(date, 2); // adds 2 hours
     const dateObject = {
-      day: date.getDate(),
-      month: date.getMonth() + 1,
-      year: date.getFullYear(),
-      hours: date.getHours() +2,
-      minute: date.getMinutes(),
+      day:  hoursAddedDate.getDate(),
+      month: hoursAddedDate.getMonth() + 1,
+      year:  hoursAddedDate.getFullYear(),
+      hours:  hoursAddedDate.getHours(),
+      minute:  hoursAddedDate.getMinutes(),
     };
     console.log("now date", dateObject);
+
     return dateObject;
   };
+  
+  
+/*
+function addHours(date, hours) {
+  date.setHours(date.getHours() + hours);
 
+  return date;
+}
+
+const date = new Date('2022-05-15T12:00:00.000Z');
+
+const newDate = addHours(date, 5);
+*/
+  
+  
   const dateSample = dateIndividualData(new Date(getPreviousDate));
   console.log("dateSample", dateSample);
 
