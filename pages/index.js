@@ -42,13 +42,14 @@ export const getServerSideProps = async () => {
   };
 
   const nowDate = () => {
-    const now = new Date();
+    const d = new Date();
+  const s = d.toLocaleString(undefined,{timeZone:"Africa/Cairo"});
     const dateObject = {
-      day: now.getDate(),
-      month: now.getMonth() + 1,
-      year: now.getFullYear(),
-      hours: now.getHours(),
-      minute: now.getMinutes(),
+      day: s.getDate(),
+      month: s.getMonth() + 1,
+      year: s.getFullYear(),
+      hours: s.getHours(),
+      minute: s.getMinutes(),
     };
     console.log("now date", dateObject);
     return dateObject;
