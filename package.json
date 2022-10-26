@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "NODE_OPTIONS='--http-server-default-timeout=0'  next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
