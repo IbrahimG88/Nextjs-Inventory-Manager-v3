@@ -103,7 +103,7 @@ export const getServerSideProps = async () => {
   }
   console.log("finalArray look", finalArray);
 
-  fetch(`${process.env.APP_URL}/api/optimizedUpdateItemStocks`, {
+ await fetch(`${process.env.APP_URL}/api/optimizedUpdateItemStocks`, {
     method: "POST",
     body: JSON.stringify(finalArray),
     headers: {
